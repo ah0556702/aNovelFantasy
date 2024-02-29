@@ -1,0 +1,8 @@
+@font-face {
+    font-family: "VictorianFont";
+    src: url('org/example/anovelfantasy/VictorianFont.ttf');
+}
+
+.gameTitle{
+    -fx-font-family: "VictorianFont", sans-serif;
+}
