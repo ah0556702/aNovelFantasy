@@ -6,3 +6,7 @@
 .gameTitle{
     -fx-font-family: "VictorianFont", sans-serif;
 }
+
+.separator{
+    -fx-background-color: black;
+}
