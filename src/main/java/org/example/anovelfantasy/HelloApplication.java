@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
@@ -19,6 +20,8 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("startScreen.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
+
+        ((AnchorPane) root).setPrefSize(850, 600);
         //Scene scene = new Scene(fxmlLoader.load(), 350, 575);
         //scene.getStylesheets().add("/styles.css");
         scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());

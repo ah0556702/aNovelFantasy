@@ -31,36 +31,37 @@ public class Game {
         }
     }
 
-    public void initialize(){ // initiliazes the grid pane to show the books on the bookshelves
-        fetchData();
-
-        int numRows = gridPane.getRowCount();
-        int numCol = gridPane.getColumnCount();
-
-        for(int i = 0; i < numRows; i++){ // counts against the num of rows
-            if(i % 2 == 0){ // determines if they are even
-                for(int j = 0; j < numCol; j++){ // inner for loop counts against the num of columns
-                    Separator sep = new Separator(); // declare a new separator
-                    sep.getStyleClass().add("separator");
-                    gridPane.add(sep, j, i); // apply separator to each column on an even row
-                    GridPane.setHgrow(sep, Priority.NEVER);
-                    GridPane.setVgrow(sep, Priority.NEVER);
-
-                    for(int k = 0; k < numCol; k++){ // add vertical separators
-                        Separator separator = new Separator(Orientation.VERTICAL);
-                        separator.getStyleClass().add("separator");
-                        gridPane.add(separator, i, k);
-                        GridPane.setHgrow(separator, Priority.NEVER);
-                        GridPane.setVgrow(separator, Priority.NEVER);
-                    }
-                }
-            } else {
-                // add else statement to load books onto the shelf
-            }
-        }
-
-
-    }
+//    public void initialize(){ // initiliazes the grid pane to show the books on the bookshelves
+//        fetchData();
+//
+//        int numRows = gridPane.getRowCount();
+//        int numCol = gridPane.getColumnCount();
+//
+//        for(int i = 0; i < numRows; i++){ // counts against the num of rows
+//            if(i % 2 == 0){ // determines if they are even
+//                for(int j = 0; j < numCol; j++){ // inner for loop counts against the num of columns
+//                    Separator sep = new Separator(); // declare a new separator
+//                    sep.getStyleClass().add("separator");
+//                    gridPane.add(sep, j, i); // apply separator to each column on an even row
+//                    GridPane.setHgrow(sep, Priority.NEVER);
+//                    GridPane.setVgrow(sep, Priority.NEVER);
+//
+//                    for(int k = 0; k < numCol; k++){ // add vertical separators
+//                        Separator separator = new Separator(Orientation.VERTICAL);
+//                        separator.getStyleClass().add("separator");
+//                        gridPane.add(separator, i, k);
+//                        GridPane.setHgrow(separator, Priority.NEVER);
+//                        GridPane.setVgrow(separator, Priority.NEVER);
+//                    }
+//                }
+//            } else {
+//
+//                // add else statement to load books onto the shelf
+//            }
+//        }
+//
+//
+//    }
     private final BooksAPI apiService = new BooksAPI();
     @FXML
     public TextArea testing;
@@ -68,7 +69,6 @@ public class Game {
     @FXML
     private void fetchData(){
         try{
-            //testAPI.getText().toString();
             String apiResponse = BooksAPI.fetchApiData("https://api.nytimes.com/svc/books/v3/lists/full-overview.json?api-key=c3amEnaHm0AqXLz4ejrGL5jGRIeyVygF");
             String jsonData = new String(apiResponse);
             testing.setText(jsonData);
