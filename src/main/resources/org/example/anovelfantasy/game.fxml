@@ -15,7 +15,7 @@
             </ImageView>
          </children>
       </StackPane>
-      <GridPane fx:id="gridPane" layoutX="155.0" layoutY="206.0" prefHeight="302.0" prefWidth="268.0">
+      <GridPane fx:id="gridPane" layoutX="155.0" layoutY="206.0" prefHeight="302.0" prefWidth="261.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />

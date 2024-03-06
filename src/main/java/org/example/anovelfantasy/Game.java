@@ -87,49 +87,24 @@ public class Game {
         int numCols = gridPane.getColumnConstraints().size();
 
 // Calculate the width and height of each grid slot
-        double slotWidth = gridPane.getWidth() / numCols;
-        double slotHeight = gridPane.getHeight() / numRows;
 
         for (int row = 0; row < numRows; row++) {
             for (int col = 0; col < numCols; col++) {
                 if (imageIndex < images.size()) {
                     // Create ImageView and set its fitWidth and fitHeight
                     ImageView imageView = new ImageView(images.get(imageIndex));
-                    resizeImage(imageView, slotWidth, slotHeight);
 
                     // Add ImageView to the grid pane
                     gridPane.add(imageView, col, row);
                     imageIndex++;
                 } else {
+                    imageIndex = 0;
+                    ImageView imageView = new ImageView(images.get(imageIndex));
+                    gridPane.add(imageView, col, row);
+                    imageIndex++;
                     // If there are no more images, break out of the loop
-                    break;
                 }
             }
         }
-
-
     }
-
-    // Method to resize an image to fit inside the grid slot
-    private void resizeImage(ImageView imageView, double slotWidth, double slotHeight) {
-        // Get the original dimensions of the image
-        double originalWidth = imageView.getImage().getWidth();
-        double originalHeight = imageView.getImage().getHeight();
-
-        // Calculate the scale factors for width and height to fit inside the slot
-        double widthScaleFactor = slotWidth / originalWidth;
-        double heightScaleFactor = slotHeight / originalHeight;
-
-        // Choose the smaller scale factor to maintain aspect ratio
-        double scaleFactor = Math.min(widthScaleFactor, heightScaleFactor);
-
-        // Calculate the new dimensions for the image
-        double fitWidth = originalWidth * scaleFactor;
-        double fitHeight = originalHeight * scaleFactor;
-
-        // Set the fitWidth and fitHeight properties to resize the image
-        imageView.setFitWidth(fitWidth);
-        imageView.setFitHeight(fitHeight);
-    }
-
 }
