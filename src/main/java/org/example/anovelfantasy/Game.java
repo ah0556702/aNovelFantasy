@@ -27,6 +27,8 @@ import java.util.List;
 
 public class Game {
 
+
+
     public static void show(Scene current) {
         try{
 
@@ -38,8 +40,8 @@ public class Game {
         }
     }
     private final BooksAPI apiService = new BooksAPI();
-    @FXML
-    public TextArea testing;
+    //@FXML
+    //public TextArea testing;
 
 //    @FXML
 //    private void fetchData(){
@@ -56,7 +58,10 @@ public class Game {
     public GridPane gridPane;
 
     @FXML
+    private TextArea testing;
+    @FXML
     private void initialize() {
+        updateTestingTextArea();
         // Load image paths
         String[] imgPaths = {
                 "C:\\Users\\snide\\OneDrive - Ozarks Technical Community College\\Java 2\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\blueGreenR.png",
@@ -102,9 +107,25 @@ public class Game {
 
                 imageIndex++;
                 bookIndex++;
-
             }
         }
+    }
+
+
+    // Test function to update the testing text area with all titles from API
+    private void updateTestingTextArea() {
+        // API Call to fetch books
+        ArrayList<Books> booksList = Books.fetchBooksFromAPI("https://api.nytimes.com/svc/books/v3/lists/full-overview.json?api-key=c3amEnaHm0AqXLz4ejrGL5jGRIeyVygF");
+
+        StringBuilder sb = new StringBuilder();
+
+        // Append each title to the string builder with a new line
+        for (Books book : booksList) {
+            sb.append(book.getTitle()).append("\n");
+        }
+
+        // Update the testing text area
+        testing.setText(sb.toString());
     }
 
     private void setClickEvent(ImageView imageView, Books book){
