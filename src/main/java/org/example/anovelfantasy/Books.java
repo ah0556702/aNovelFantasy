@@ -42,7 +42,7 @@ public class Books {
         this.summary = summary;
     }
 
-    // Method to fetch data from the API and populate Book objects
+    // fetch data from API and populate Book objects
     public static ArrayList<Books> fetchBooksFromAPI(String apiUrl) {
         ArrayList<Books> books = new ArrayList<>();
         try {

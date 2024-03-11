@@ -41,16 +41,16 @@ public class Game {
     @FXML
     public TextArea testing;
 
-    @FXML
-    private void fetchData(){
-        try{
-            String apiResponse = BooksAPI.fetchApiData("https://api.nytimes.com/svc/books/v3/lists/full-overview.json?api-key=c3amEnaHm0AqXLz4ejrGL5jGRIeyVygF");
-            String jsonData = new String(apiResponse);
-            testing.setText(jsonData);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
+//    @FXML
+//    private void fetchData(){
+//        try{
+//            String apiResponse = BooksAPI.fetchApiData("https://api.nytimes.com/svc/books/v3/lists/full-overview.json?api-key=c3amEnaHm0AqXLz4ejrGL5jGRIeyVygF");
+//            String jsonData = new String(apiResponse);
+//            testing.setText(jsonData);
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
+//    }
 
     @FXML
     public GridPane gridPane;
@@ -81,30 +81,35 @@ public class Game {
 
         // Shuffle the images
         Collections.shuffle(images);
-
         int imageIndex = 0;
+        int bookIndex = 0;
         int numRows = gridPane.getRowConstraints().size();
         int numCols = gridPane.getColumnConstraints().size();
+
+        // API Call
+        ArrayList<Books> booksList = Books.fetchBooksFromAPI("https://api.nytimes.com/svc/books/v3/lists/full-overview.json?api-key=c3amEnaHm0AqXLz4ejrGL5jGRIeyVygF");
 
 // Calculate the width and height of each grid slot
 
         for (int row = 0; row < numRows; row++) {
             for (int col = 0; col < numCols; col++) {
-                if (imageIndex < images.size()) {
-                    // Create ImageView and set its fitWidth and fitHeight
-                    ImageView imageView = new ImageView(images.get(imageIndex));
+                imageIndex %= images.size();
+                bookIndex %= booksList.size();
 
-                    // Add ImageView to the grid pane
-                    gridPane.add(imageView, col, row);
-                    imageIndex++;
-                } else {
-                    imageIndex = 0;
-                    ImageView imageView = new ImageView(images.get(imageIndex));
-                    gridPane.add(imageView, col, row);
-                    imageIndex++;
-                    // If there are no more images, break out of the loop
-                }
+                ImageView imageView = new ImageView(images.get(imageIndex));
+                setClickEvent(imageView, booksList.get(bookIndex));
+                gridPane.add(imageView, col, row);
+
+                imageIndex++;
+                bookIndex++;
+
             }
         }
+    }
+
+    private void setClickEvent(ImageView imageView, Books book){
+        imageView.setOnMouseClicked(event -> {
+            testing.setText(book.getTitle() + " " + book.getAuthor() + " " + book.getSummary());
+        });
     }
 }
