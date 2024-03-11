@@ -10,6 +10,7 @@ module org.example.anovelfantasy {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires org.json;
 
     opens org.example.anovelfantasy to javafx.fxml;
     exports org.example.anovelfantasy;
