@@ -16,6 +16,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -114,18 +116,40 @@ public class Game {
 
     // Test function to update the testing text area with all titles from API
     private void updateTestingTextArea() {
-        // API Call to fetch books
-        ArrayList<Books> booksList = Books.fetchBooksFromAPI("https://api.nytimes.com/svc/books/v3/lists/full-overview.json?api-key=c3amEnaHm0AqXLz4ejrGL5jGRIeyVygF");
+//        // API Call to fetch books
+//        ArrayList<Books> booksList = Books.fetchBooksFromAPI("https://api.nytimes.com/svc/books/v3/lists/full-overview.json?api-key=c3amEnaHm0AqXLz4ejrGL5jGRIeyVygF");
+//
+//        StringBuilder sb = new StringBuilder();
+//
+//        // Append each title to the string builder with a new line
+//        for (Books book : booksList) {
+//            sb.append(book.getTitle()).append("\n");
+//        }
+//
+//        // Update the testing text area
+//        testing.setText(sb.toString());
 
-        StringBuilder sb = new StringBuilder();
+        try {
+            // Fetch popular books data from API
+            String popularBooksData = BooksAPI.fetchClassicBooks();
 
-        // Append each title to the string builder with a new line
-        for (Books book : booksList) {
-            sb.append(book.getTitle()).append("\n");
+            // Parse the JSON data to extract book titles
+            JSONArray items = new JSONObject(popularBooksData).getJSONArray("items");
+            StringBuilder titlesBuilder = new StringBuilder();
+
+            for (int i = 0; i < items.length(); i++) {
+                JSONObject item = items.getJSONObject(i);
+                JSONObject volumeInfo = item.getJSONObject("volumeInfo");
+                String title = volumeInfo.getString("title");
+                titlesBuilder.append(title).append("\n");
+            }
+
+            // Update the testing TextArea with book titles
+            testing.setText(titlesBuilder.toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        // Update the testing text area
-        testing.setText(sb.toString());
     }
 
     private void setClickEvent(ImageView imageView, Books book){
