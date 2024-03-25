@@ -42,19 +42,6 @@ public class Game {
         }
     }
     private final BooksAPI apiService = new BooksAPI();
-    //@FXML
-    //public TextArea testing;
-
-//    @FXML
-//    private void fetchData(){
-//        try{
-//            String apiResponse = BooksAPI.fetchApiData("https://api.nytimes.com/svc/books/v3/lists/full-overview.json?api-key=c3amEnaHm0AqXLz4ejrGL5jGRIeyVygF");
-//            String jsonData = new String(apiResponse);
-//            testing.setText(jsonData);
-//        } catch (Exception e){
-//            e.printStackTrace();
-//        }
-//    }
 
     @FXML
     public GridPane gridPane;
