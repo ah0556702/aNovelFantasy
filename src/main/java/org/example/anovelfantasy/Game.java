@@ -66,15 +66,15 @@ public class Game {
         updateTestingTextArea();
         // Load image paths
         String[] imgPaths = {
-                "C:\\Users\\snide\\OneDrive - Ozarks Technical Community College\\Java 2\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\blueGreenR.png",
-                "C:\\Users\\snide\\OneDrive - Ozarks Technical Community College\\Java 2\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\brownR.png",
-                "C:\\Users\\snide\\OneDrive - Ozarks Technical Community College\\Java 2\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\darkBlueR.png",
-                "C:\\Users\\snide\\OneDrive - Ozarks Technical Community College\\Java 2\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\greyR.png",
-                "C:\\Users\\snide\\OneDrive - Ozarks Technical Community College\\Java 2\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\maroonR.png",
-                "C:\\Users\\snide\\OneDrive - Ozarks Technical Community College\\Java 2\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\orangeR.png",
-                "C:\\Users\\snide\\OneDrive - Ozarks Technical Community College\\Java 2\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\purpleR.png",
-                "C:\\Users\\snide\\OneDrive - Ozarks Technical Community College\\Java 2\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\royalBlueR.png",
-                "C:\\Users\\snide\\OneDrive - Ozarks Technical Community College\\Java 2\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\silverPurpleR.png"
+                "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\blueGreenR.png",
+        "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\brownR.png",
+        "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\darkBlueR.png",
+        "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\greyR.png",
+        "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\maroonR.png",
+        "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\orangeR.png",
+        "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\purpleR.png",
+        "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\royalBlueR.png",
+        "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\silverPurpleR.png"
         };
 
         // Create a list to store Image objects
@@ -116,18 +116,6 @@ public class Game {
 
     // Test function to update the testing text area with all titles from API
     private void updateTestingTextArea() {
-//        // API Call to fetch books
-//        ArrayList<Books> booksList = Books.fetchBooksFromAPI("https://api.nytimes.com/svc/books/v3/lists/full-overview.json?api-key=c3amEnaHm0AqXLz4ejrGL5jGRIeyVygF");
-//
-//        StringBuilder sb = new StringBuilder();
-//
-//        // Append each title to the string builder with a new line
-//        for (Books book : booksList) {
-//            sb.append(book.getTitle()).append("\n");
-//        }
-//
-//        // Update the testing text area
-//        testing.setText(sb.toString());
 
         try {
             // Fetch popular books data from API

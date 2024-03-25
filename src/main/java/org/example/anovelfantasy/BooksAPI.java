@@ -27,17 +27,17 @@ public class BooksAPI {
     private static final String BASE_URL = "https://www.googleapis.com/books/v1/volumes";
 
     public static String fetchPopularBooks() throws Exception {
-        String apiUrl = BASE_URL + "?q=subject:fiction&orderBy=relevance&maxResults=10&key=AIzaSyA90DQsb08hjSgng1KGCJUGvfV98Mketa0";
+        String apiUrl = BASE_URL + "?q=subject:fiction&orderBy=relevance&maxResults=40&key=AIzaSyA90DQsb08hjSgng1KGCJUGvfV98Mketa0";
         return fetchApiData(apiUrl);
     }
 
     public static String fetchClassicBooks() throws Exception {
-        String apiUrl = BASE_URL + "?q=subject:classic&orderBy=relevance&maxResults=10&key=AIzaSyA90DQsb08hjSgng1KGCJUGvfV98Mketa0";
+        String apiUrl = BASE_URL + "?q=subject:classic&orderBy=relevance&maxResults=40&key=AIzaSyA90DQsb08hjSgng1KGCJUGvfV98Mketa0";
         return fetchApiData(apiUrl);
     }
 
     public static String fetchFantasyBooks(int numResults) throws Exception {
-        String apiUrl = BASE_URL + "?q=subject:fantasy&orderBy=relevance&maxResults=10&key=AIzaSyA90DQsb08hjSgng1KGCJUGvfV98Mketa0";
+        String apiUrl = BASE_URL + "?q=subject:fantasy&orderBy=relevance&maxResults=40&key=AIzaSyA90DQsb08hjSgng1KGCJUGvfV98Mketa0";
         return fetchApiData(apiUrl);
     }
 }
