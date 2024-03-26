@@ -37,4 +37,10 @@
       </GridPane>
       <TextArea fx:id="testing" layoutX="516.0" layoutY="112.0" prefHeight="331.0" prefWidth="235.0" styleClass="testAPI" />
    </children>
-</AnchorPane>
+
+   <Pane fx:id="bookPane" visible="false">
+      <ImageView fx:id="wholeBookImg"/>
+      <Label fx:id="bookDetails" wrapText="true"/>
+   </Pane>
+
+        </AnchorPane>

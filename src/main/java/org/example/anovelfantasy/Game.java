@@ -10,10 +10,7 @@ import javafx.scene.control.Separator;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 import org.json.JSONArray;
@@ -28,8 +25,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class Game {
-
-
 
     public static void show(Scene current) {
         try{
@@ -126,9 +121,47 @@ public class Game {
         }
     }
 
+
+
+    String[] bookImages = {
+            "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\wholeBook\\blueGreen.png",
+            "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\wholeBook\\brown.png",
+            "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\wholeBook\\darkBlue.png",
+            "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\wholeBook\\grey.png",
+            "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\wholeBook\\maroon.png",
+            "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\wholeBook\\orange.png",
+            "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\wholeBook\\purple.png",
+            "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\wholeBook\\royalBlue.png",
+            "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\wholeBook\\silverPurple.png"
+    };
+
+    @FXML
+    private ImageView wholeBookImg;
+    @FXML
+    private Label bookDetails;
+    @FXML
+    private Pane bookPane;
+@FXML
+    private Image getWholeImageForBook(Books book) {
+        // Example: return new Image(book.getLargeImageUrl());
+        // For now, just return a placeholder or an example image
+        File file = new File(bookImages[0]);
+        String imagePath = file.toURI().toString();
+        return new Image(imagePath);
+    }
+@FXML
     private void setClickEvent(ImageView imageView, Books book){
         imageView.setOnMouseClicked(event -> {
             testing.setText(book.getTitle() + " " + book.getAuthor() + " " + book.getSummary());
         });
+
+        Image wholeBook = getWholeImageForBook(book);
+        wholeBookImg.setImage(wholeBook);
+
+        String detailsTxt = String.format("%s\n\nAuthor: %s\n\nSummary:\n%s",
+                book.getTitle(), book.getAuthor(), book.getSummary());
+        bookDetails.setText(detailsTxt);
+
+        bookPane.setVisible(true);
     }
 }
