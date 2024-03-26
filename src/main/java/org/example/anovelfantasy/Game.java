@@ -33,7 +33,6 @@ public class Game {
 
     public static void show(Scene current) {
         try{
-
             FXMLLoader loader = new FXMLLoader(Game.class.getResource("game.fxml"));
             Parent root = loader.load();
             current.setRoot(root);

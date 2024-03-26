@@ -24,7 +24,7 @@ public class StartScreen{
     @FXML
     private void playBtnClick(){
         if(current != null){
-            Game.show(current);
+            Loading.show(current);
         } else {
             System.err.println("Current scene is null");
         }
