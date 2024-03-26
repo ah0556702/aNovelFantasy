@@ -43,7 +43,9 @@ public class Game {
     @FXML
     private TextArea testing;
     @FXML
-    private void initialize() {
+    private Pane bookPane;
+    @FXML
+    private void initialize() throws Exception {
         updateTestingTextArea();
         // Load image paths
         String[] imgPaths = {
@@ -75,23 +77,73 @@ public class Game {
         int numCols = gridPane.getColumnConstraints().size();
 
         // API Call
-        ArrayList<Books> booksList = Books.fetchBooksFromAPI("https://api.nytimes.com/svc/books/v3/lists/full-overview.json?api-key=c3amEnaHm0AqXLz4ejrGL5jGRIeyVygF");
-
+        //ArrayList<Books> booksList = Books.fetchBooksFromAPI("https://api.nytimes.com/svc/books/v3/lists/full-overview.json?api-key=c3amEnaHm0AqXLz4ejrGL5jGRIeyVygF");
+        ArrayList<Books> booksList = new ArrayList<>(40);
 // Calculate the width and height of each grid slot
+        String popularBooksData = BooksAPI.fetchClassicBooks();
 
+        // Parse the JSON data to extract book titles
+        JSONArray items = new JSONObject(popularBooksData).getJSONArray("items");
+        StringBuilder titlesBuilder = new StringBuilder();
+
+//        for (int i = 0; i < items.length(); i++) {
+//            JSONObject item = items.getJSONObject(i);
+//            JSONObject volumeInfo = item.getJSONObject("volumeInfo");
+//            String title = volumeInfo.getString("title");
+//            titlesBuilder.append(title).append("\n");
+//        }
+//        for (int row = 0; row < numRows; row++) {
+//            for (int col = 0; col < numCols; col++) {
+//                imageIndex %= images.size();
+//                bookIndex %= items.length();
+//
+//                ImageView imageView = new ImageView(images.get(imageIndex));
+//                setClickEvent(imageView, booksList.get(bookIndex), bookIndex);
+//                gridPane.add(imageView, col, row);
+//
+//                imageIndex++;
+//                bookIndex++;
+//            }
+//        }
         for (int row = 0; row < numRows; row++) {
             for (int col = 0; col < numCols; col++) {
                 imageIndex %= images.size();
-                bookIndex %= booksList.size();
+                bookIndex %= items.length(); // Ensure the index wraps around the JSON array size
+
+                JSONObject item = items.getJSONObject(bookIndex); // Get the JSONObject representing the book
+                JSONObject volumeInfo = item.getJSONObject("volumeInfo"); // Get the "volumeInfo" JSONObject
+                String title = volumeInfo.getString("title"); // Extract the book title
+
+                // Assuming 'volumeInfo' is your JSONObject
+                JSONArray authorsArray = volumeInfo.optJSONArray("authors"); // Safely get the authors array, will return null if not found
+                StringBuilder authorsBuilder = new StringBuilder();
+
+                if (authorsArray != null) {
+                    for (int j = 0; j < authorsArray.length(); j++) {
+                        // Extract each author and append to StringBuilder
+                        String author = authorsArray.optString(j, "No Author"); // Use optString for safe retrieval
+                        authorsBuilder.append(author);
+                        if (j < authorsArray.length() - 1) {
+                            authorsBuilder.append(", "); // Add comma between authors, but not after the last one
+                        }
+                    }
+                } else {
+                    authorsBuilder.append("Author information not available");
+                }
+
+                String authors = authorsBuilder.toString(); // This is your authors string
+
 
                 ImageView imageView = new ImageView(images.get(imageIndex));
-                setClickEvent(imageView, booksList.get(bookIndex));
+                // Assuming setClickEvent now accepts a String for the book title and an int for the index
+                setClickEvent(imageView, title, bookIndex, volumeInfo, authors); // Pass the title to the method
                 gridPane.add(imageView, col, row);
 
                 imageIndex++;
                 bookIndex++;
             }
         }
+
     }
 
 
@@ -122,7 +174,7 @@ public class Game {
     }
 
 
-
+    @FXML
     String[] bookImages = {
             "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\wholeBook\\blueGreen.png",
             "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\wholeBook\\brown.png",
@@ -139,10 +191,9 @@ public class Game {
     private ImageView wholeBookImg;
     @FXML
     private Label bookDetails;
-    @FXML
-    private Pane bookPane;
+
 @FXML
-    private Image getWholeImageForBook(Books book) {
+    private Image getWholeImageForBook(JSONObject book) {
         // Example: return new Image(book.getLargeImageUrl());
         // For now, just return a placeholder or an example image
         File file = new File(bookImages[0]);
@@ -150,18 +201,24 @@ public class Game {
         return new Image(imagePath);
     }
 @FXML
-    private void setClickEvent(ImageView imageView, Books book){
-        imageView.setOnMouseClicked(event -> {
-            testing.setText(book.getTitle() + " " + book.getAuthor() + " " + book.getSummary());
+    private void setClickEvent(ImageView imageView, String title, int bookIndex, JSONObject book, String authors){
+    String description = book.optString("description", "No description available.");
+
+    imageView.setOnMouseClicked(event -> {
+            testing.setText(book.getString("title") + " " + authors + " " + description);
+            System.out.println(title);
+            bookPane.setVisible(true);
         });
 
         Image wholeBook = getWholeImageForBook(book);
-        wholeBookImg.setImage(wholeBook);
 
-        String detailsTxt = String.format("%s\n\nAuthor: %s\n\nSummary:\n%s",
-                book.getTitle(), book.getAuthor(), book.getSummary());
-        bookDetails.setText(detailsTxt);
+    wholeBookImg.setImage(wholeBook);
 
-        bookPane.setVisible(true);
+    String detailsTxt = String.format("%s\n\nAuthor: %s\n\nSummary:\n%s",
+            book.getString("title"), authors.toString(), description);
+    bookDetails.setText(detailsTxt);
+
+
+        bookPane.setVisible(false);
     }
 }

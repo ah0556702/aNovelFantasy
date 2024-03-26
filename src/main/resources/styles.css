@@ -10,3 +10,7 @@
 .separator{
     -fx-background-color: black;
 }
+
+.bookDetails{
+    -fx-text-fill: white;
+}
