@@ -22,6 +22,7 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(root);
 
         ((AnchorPane) root).setPrefSize(850, 600);
+
         // scene = new Scene(fxmlLoader.load(), 350, 575);
         //scene.getStylesheets().add("/styles.css");
         scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
