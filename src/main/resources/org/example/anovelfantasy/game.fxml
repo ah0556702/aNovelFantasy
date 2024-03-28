@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
@@ -40,14 +41,17 @@
    </children>
 
       <Pane fx:id="bookPane" layoutX="75.0" layoutY="61.0" maxHeight="427.0" maxWidth="649.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="649.0" visible="false">
-         <ImageView fx:id="wholeBookImg" fitHeight="427.0" fitWidth="650.0" />
+         <ImageView fx:id="wholeBookImg" fitHeight="427.0" fitWidth="650.0">
+         <effect>
+            <DropShadow />
+         </effect></ImageView>
          <HBox prefHeight="427.0" prefWidth="650.0">
 
             <Label fx:id="bookDetails" maxHeight="100" maxWidth="175" minWidth="175" prefWidth="175" styleClass="bookDetails" wrapText="true">
             <HBox.margin>
                <Insets left="60.0" top="75.0" />
             </HBox.margin></Label>
-            <TextField fx:id="inputGuess" prefHeight="29.0" prefWidth="151.0">
+            <TextField fx:id="inputGuess" styleClass="transparent-text-field" prefHeight="29.0" prefWidth="151.0">
             <HBox.margin>
                <Insets left="200.0" top="150.0" />
             </HBox.margin></TextField>

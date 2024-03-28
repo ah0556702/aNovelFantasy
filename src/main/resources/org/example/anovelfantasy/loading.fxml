@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.media.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.anovelfantasy.Loading">
+<AnchorPane fx:id="loadingAnchor" prefHeight="554.0" prefWidth="798.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.anovelfantasy.Loading">
    <children>
-      <VBox layoutX="194.0" layoutY="1.0" prefHeight="400.0" prefWidth="208.0">
-         <children>
-            <MediaView fitHeight="200.0" fitWidth="200.0" fx:id="mediaView"/>
-            <Label text="Loading..." />
-         </children></VBox>
+      <MediaView fx:id="mediaView" fitHeight="400.0" fitWidth="400.0" layoutX="220.0" layoutY="75.0" />
    </children>
 </AnchorPane>

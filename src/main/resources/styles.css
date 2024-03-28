@@ -14,3 +14,13 @@
 .bookDetails{
     -fx-text-fill: white;
 }
+
+.transparent-text-field {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-text-fill: white;
+}
+
+.loadingAnchor {
+    -fx-background-color: white;
+}
