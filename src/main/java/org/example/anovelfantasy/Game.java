@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextArea;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -44,6 +45,9 @@ public class Game {
     private TextArea testing;
     @FXML
     private Pane bookPane;
+
+    @FXML
+    private ImageView bookShelfBack;
     @FXML
     private void initialize() throws Exception {
         updateTestingTextArea();
@@ -77,34 +81,14 @@ public class Game {
         int numCols = gridPane.getColumnConstraints().size();
 
         // API Call
-        //ArrayList<Books> booksList = Books.fetchBooksFromAPI("https://api.nytimes.com/svc/books/v3/lists/full-overview.json?api-key=c3amEnaHm0AqXLz4ejrGL5jGRIeyVygF");
         ArrayList<Books> booksList = new ArrayList<>(40);
-// Calculate the width and height of each grid slot
+        // Calculate the width and height of each grid slot
         String popularBooksData = BooksAPI.fetchClassicBooks();
 
         // Parse the JSON data to extract book titles
         JSONArray items = new JSONObject(popularBooksData).getJSONArray("items");
         StringBuilder titlesBuilder = new StringBuilder();
 
-//        for (int i = 0; i < items.length(); i++) {
-//            JSONObject item = items.getJSONObject(i);
-//            JSONObject volumeInfo = item.getJSONObject("volumeInfo");
-//            String title = volumeInfo.getString("title");
-//            titlesBuilder.append(title).append("\n");
-//        }
-//        for (int row = 0; row < numRows; row++) {
-//            for (int col = 0; col < numCols; col++) {
-//                imageIndex %= images.size();
-//                bookIndex %= items.length();
-//
-//                ImageView imageView = new ImageView(images.get(imageIndex));
-//                setClickEvent(imageView, booksList.get(bookIndex), bookIndex);
-//                gridPane.add(imageView, col, row);
-//
-//                imageIndex++;
-//                bookIndex++;
-//            }
-//        }
         for (int row = 0; row < numRows; row++) {
             for (int col = 0; col < numCols; col++) {
                 imageIndex %= images.size();
@@ -121,22 +105,21 @@ public class Game {
                 if (authorsArray != null) {
                     for (int j = 0; j < authorsArray.length(); j++) {
                         // Extract each author and append to StringBuilder
-                        String author = authorsArray.optString(j, "No Author"); // Use optString for safe retrieval
+                        String author = authorsArray.optString(j, "No Author");
                         authorsBuilder.append(author);
                         if (j < authorsArray.length() - 1) {
-                            authorsBuilder.append(", "); // Add comma between authors, but not after the last one
+                            authorsBuilder.append(", ");
                         }
                     }
                 } else {
                     authorsBuilder.append("Author information not available");
                 }
 
-                String authors = authorsBuilder.toString(); // This is your authors string
+                String authors = authorsBuilder.toString();
 
 
                 ImageView imageView = new ImageView(images.get(imageIndex));
-                // Assuming setClickEvent now accepts a String for the book title and an int for the index
-                setClickEvent(imageView, title, bookIndex, volumeInfo, authors); // Pass the title to the method
+                setClickEvent(imageView, title, bookIndex, volumeInfo, authors);
                 gridPane.add(imageView, col, row);
 
                 imageIndex++;
@@ -208,6 +191,10 @@ public class Game {
             testing.setText(book.getString("title") + " " + authors + " " + description);
             System.out.println(title);
             bookPane.setVisible(true);
+            gridPane.setVisible(false);
+
+            GaussianBlur gaussianBlur = new GaussianBlur();
+            bookShelfBack.setEffect(gaussianBlur);
         });
 
         Image wholeBook = getWholeImageForBook(book);
