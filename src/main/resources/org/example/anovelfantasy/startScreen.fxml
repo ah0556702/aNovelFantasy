@@ -3,24 +3,32 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.anovelfantasy.StartScreen">
+<AnchorPane prefHeight="554.0" prefWidth="798.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.anovelfantasy.StartScreen">
    <children>
-      <ButtonBar layoutX="131.0" layoutY="288.0" prefHeight="40.0" prefWidth="200.0">
-        <buttons>
-          <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#playBtnClick" text="Play" textAlignment="CENTER">
+      <VBox layoutX="164.0" layoutY="6.0" prefHeight="554.0" prefWidth="470.0">
+         <children>
+            <ImageView fitHeight="371.0" fitWidth="344.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/logo.png" />
+               </image>
+               <VBox.margin>
+                  <Insets left="65.0" top="50.0" />
+               </VBox.margin>
+            </ImageView>
+          <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#playBtnClick" prefHeight="26.0" prefWidth="229.0" text="Play" textAlignment="CENTER">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
                <effect>
                   <Reflection />
-               </effect></Button>
-        </buttons>
-      </ButtonBar>
-      <VBox layoutX="178.0" layoutY="56.0" prefHeight="200.0" prefWidth="225.0">
-         <children>
-            <Label fx:id="gameTitle" styleClass="gameTitle" text="A Novel Fantasy" />
+               </effect>
+               <VBox.margin>
+                  <Insets left="125.0" top="35.0" />
+               </VBox.margin>
+            </Button>
          </children>
       </VBox>
    </children>

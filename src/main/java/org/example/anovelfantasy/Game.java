@@ -130,9 +130,7 @@ public class Game {
                 bookIndex++;
             }
         }
-
     }
-
 
     // Test function to update the testing text area with all titles from API
     private void updateTestingTextArea() {
