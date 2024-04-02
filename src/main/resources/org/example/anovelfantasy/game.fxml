@@ -51,7 +51,7 @@
             <HBox.margin>
                <Insets left="60.0" top="75.0" />
             </HBox.margin></Label>
-            <TextField fx:id="inputGuess" styleClass="transparent-text-field" prefHeight="29.0" prefWidth="151.0">
+            <TextField fx:id="inputGuess" prefHeight="29.0" prefWidth="151.0" styleClass="transparent-text-field">
             <HBox.margin>
                <Insets left="200.0" top="150.0" />
             </HBox.margin></TextField>

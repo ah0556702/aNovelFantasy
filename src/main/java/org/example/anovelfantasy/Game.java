@@ -25,6 +25,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class Game {
 
@@ -123,6 +124,8 @@ public class Game {
                 setClickEvent(imageView, title, bookIndex, volumeInfo, authors);
                 gridPane.add(imageView, col, row);
 
+                Collections.shuffle(images); // shuffle array again
+
                 imageIndex++;
                 bookIndex++;
             }
@@ -178,9 +181,10 @@ public class Game {
 
 @FXML
     private Image getWholeImageForBook(JSONObject book) {
-        // Example: return new Image(book.getLargeImageUrl());
-        // For now, just return a placeholder or an example image
-        File file = new File(bookImages[0]);
+
+        Random randNum = new Random(bookImages.length); // random number generated
+        int num = randNum.nextInt(bookImages.length); // random number cast to int
+        File file = new File(bookImages[num]); // picks an image from the bookImages array at random
         String imagePath = file.toURI().toString();
         return new Image(imagePath);
     }
