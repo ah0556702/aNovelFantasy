@@ -6,13 +6,13 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="554.0" prefWidth="798.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.anovelfantasy.StartScreen">
+<AnchorPane prefHeight="554.0" prefWidth="798.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.anovelfantasy.StartScreen" style="-fx-background-color: #828A73;">
    <children>
       <VBox layoutX="164.0" layoutY="6.0" prefHeight="554.0" prefWidth="470.0">
          <children>
             <ImageView fitHeight="371.0" fitWidth="344.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../images/logo.png" />
+                  <Image url="@../../../images/Fantasy_Book_Binding.jpg" />
                </image>
                <VBox.margin>
                   <Insets left="65.0" top="50.0" />

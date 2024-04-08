@@ -3,7 +3,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.media.*?>
 
-<AnchorPane fx:id="loadingAnchor" prefHeight="554.0" prefWidth="798.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.anovelfantasy.Loading">
+<AnchorPane fx:id="loadingAnchor" prefHeight="554.0" prefWidth="798.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.anovelfantasy.Loading" style="-fx-background-color: #FFFFFF;">
    <children>
       <MediaView fx:id="mediaView" fitHeight="400.0" fitWidth="400.0" layoutX="220.0" layoutY="75.0" />
    </children>
