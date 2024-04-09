@@ -1,5 +1,6 @@
 package org.example.anovelfantasy;
 
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Orientation;
@@ -14,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,6 +27,10 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
+import javafx.animation.FadeTransition;
+import javafx.scene.Node;
+import javafx.util.Duration;
 import java.util.Random;
 
 public class Game {
@@ -189,7 +195,7 @@ public class Game {
 @FXML
     private void setClickEvent(ImageView imageView, String title, int bookIndex, JSONObject book, String authors){
     String description = book.optString("description", "No description available.");
-
+    currentBookTitle = title;
     imageView.setOnMouseClicked(event -> {
             testing.setText(book.getString("title") + " " + authors + " " + description);
             System.out.println(title);
@@ -215,8 +221,86 @@ public class Game {
     @FXML
     private TextField userText;
 
-    @FXML
-    private void userGuess(){
+    private String currentBookTitle; // Assume this is set when a book is clicked
+    private int guessCount = 0;
 
+    @FXML
+    private void userGuess() {
+        String userInput = userText.getText();
+        StringBuilder filteredInput = new StringBuilder();
+
+        if (currentBookTitle == null) {
+            System.out.println("No book selected or title not set");
+            // Optionally clear the userText or inform the user to select a book first
+            userText.setText("");
+            return; // Exit the method early
+        }
+        // Increase guess count
+        guessCount++;
+
+        // Filter characters
+        for (int i = 0; i < userInput.length(); i++) {
+            char c = userInput.charAt(i);
+            if (currentBookTitle.contains(String.valueOf(c))) {
+                filteredInput.append(c);
+            }
+        }
+
+        userText.setText(filteredInput.toString());
+
+        // Check if the guess is correct or if the user has guessed three times
+        if (userText.getText().equalsIgnoreCase(currentBookTitle) || guessCount >= 3) {
+            bookPane.setVisible(false);
+            gridPane.setVisible(true);
+            bookShelfBack.setEffect(null); // Remove blur
+
+            if (guessCount >= 3 && !userText.getText().equalsIgnoreCase(currentBookTitle)) {
+                // Shake gridPane and fade random ImageViews
+                shakeGridPane();
+                fadeRandomImages();
+            }
+
+            // Reset for the next guess
+            guessCount = 0;
+            userText.setText("");
+        }
     }
+
+    private void shakeGridPane() {
+        TranslateTransition tt = new TranslateTransition(Duration.millis(100), gridPane);
+        tt.setByX(5);
+        tt.setCycleCount(6);
+        tt.setAutoReverse(true);
+
+        tt.setOnFinished(event -> {
+            // If you need to perform any action after shaking ends, you can do it here
+        });
+
+        tt.play();
+    }
+
+
+    private void fadeRandomImages() {
+        Random rand = new Random();
+        List<Node> children = new ArrayList<>(gridPane.getChildren()); // Get all children of the gridPane
+        int numberOfImagesToFade = 3; // Adjust as needed, based on your UI design
+
+        // Shuffle the list to randomize which images are selected
+        Collections.shuffle(children, rand);
+
+        for (int i = 0; i < Math.min(numberOfImagesToFade, children.size()); i++) {
+            Node child = children.get(i);
+            if (child instanceof ImageView) {
+                FadeTransition ft = new FadeTransition(Duration.seconds(1), child);
+                ft.setToValue(0); // Fade to completely transparent
+                ft.setOnFinished(event -> {
+                    child.setVisible(false); // Optionally make the node invisible after fade out
+                    // Remove click event
+                    child.setOnMouseClicked(null);
+                });
+                ft.play();
+            }
+        }
+    }
+
 }
