@@ -24,3 +24,7 @@
 .loadingAnchor {
     -fx-background-color: white;
 }
+
+.gameAnchor {
+    -fx-background-color: radial-gradient(center 50% 50%, radius 70%, lightskyblue, aliceblue, white);
+}
