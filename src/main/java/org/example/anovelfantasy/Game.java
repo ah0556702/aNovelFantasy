@@ -44,6 +44,7 @@ public class Game {
             e.printStackTrace();
         }
     }
+
     private final BooksAPI apiService = new BooksAPI();
 
     @FXML
@@ -97,45 +98,28 @@ public class Game {
         JSONArray items = new JSONObject(popularBooksData).getJSONArray("items");
         StringBuilder titlesBuilder = new StringBuilder();
 
+        // Within the loop where you're adding books to the grid
         for (int row = 0; row < numRows; row++) {
             for (int col = 0; col < numCols; col++) {
-                imageIndex %= images.size();
-                bookIndex %= items.length(); // Ensure the index wraps around the JSON array size
+                // Ensure bookIndex wraps around the size of the items JSON array
+                bookIndex %= items.length();
 
-                JSONObject item = items.getJSONObject(bookIndex); // Get the JSONObject representing the book
-                JSONObject volumeInfo = item.getJSONObject("volumeInfo"); // Get the "volumeInfo" JSONObject
-                String title = volumeInfo.getString("title"); // Extract the book title
+                // Get book information from items JSON array
+                JSONObject item = items.getJSONObject(bookIndex);
+                JSONObject volumeInfo = item.getJSONObject("volumeInfo");
+                String title = volumeInfo.getString("title");
+                JSONArray authorsArray = volumeInfo.optJSONArray("authors");
+                String authors = authorsArray == null ? "Author information not available" : authorsArray.join(", ");
 
-                // Assuming 'volumeInfo' is your JSONObject
-                JSONArray authorsArray = volumeInfo.optJSONArray("authors"); // Safely get the authors array, will return null if not found
-                StringBuilder authorsBuilder = new StringBuilder();
+                // Now, ensure that the imageView for the book uses the same bookIndex to fetch the corresponding cover image
+                ImageView imageView = new ImageView(images.get(bookIndex % images.size()));
+                setClickEvent(imageView, title, bookIndex, volumeInfo, authors, bookIndex); // Pass bookIndex to setClickEvent
 
-                if (authorsArray != null) {
-                    for (int j = 0; j < authorsArray.length(); j++) {
-                        // Extract each author and append to StringBuilder
-                        String author = authorsArray.optString(j, "No Author");
-                        authorsBuilder.append(author);
-                        if (j < authorsArray.length() - 1) {
-                            authorsBuilder.append(", ");
-                        }
-                    }
-                } else {
-                    authorsBuilder.append("Author information not available");
-                }
-
-                String authors = authorsBuilder.toString();
-
-
-                ImageView imageView = new ImageView(images.get(imageIndex));
-                setClickEvent(imageView, title, bookIndex, volumeInfo, authors);
                 gridPane.add(imageView, col, row);
-
-                Collections.shuffle(images); // shuffle array again
-
-                imageIndex++;
                 bookIndex++;
             }
         }
+
     }
 
     // Test function to update the testing text area with all titles from API
@@ -164,7 +148,6 @@ public class Game {
         }
     }
 
-
     @FXML
     String[] bookImages = {
             "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\wholeBook\\blueGreen.png",
@@ -180,81 +163,106 @@ public class Game {
 
     @FXML
     private ImageView wholeBookImg;
+
     @FXML
     private Label bookDetails;
 
-@FXML
-    private Image getWholeImageForBook(JSONObject book) {
+    @FXML
+        private Image getWholeImageForBook(JSONObject book) {
 
-        Random randNum = new Random(bookImages.length); // random number generated
-        int num = randNum.nextInt(bookImages.length); // random number cast to int
-        File file = new File(bookImages[num]); // picks an image from the bookImages array at random
-        String imagePath = file.toURI().toString();
-        return new Image(imagePath);
-    }
-@FXML
-    private void setClickEvent(ImageView imageView, String title, int bookIndex, JSONObject book, String authors){
-    String description = book.optString("description", "No description available.");
-    currentBookTitle = title;
-    imageView.setOnMouseClicked(event -> {
-            testing.setText(book.getString("title") + " " + authors + " " + description);
-            System.out.println(title);
+            Random randNum = new Random(bookImages.length); // random number generated
+            int num = randNum.nextInt(bookImages.length); // random number cast to int
+            File file = new File(bookImages[num]); // picks an image from the bookImages array at random
+            String imagePath = file.toURI().toString();
+            return new Image(imagePath);
+        }
+
+    @FXML
+    private void setClickEvent(ImageView imageView, String title, int bookIndex, JSONObject book, String authors, int imageIndex){
+        imageView.setOnMouseClicked(event -> {
+            String description = book.optString("description", "No description available.");
+
+            // Set the current book title for guessing
+            currentBookTitle = title;
+
+            // Update the text area with book details
+            testing.setText(title + " " + authors + " " + description);
+
+            // Set the cover image
+            Image wholeBook = new Image(new File(bookImages[imageIndex % bookImages.length]).toURI().toString());
+            wholeBookImg.setImage(wholeBook);
+
+            // Update book details
+            bookDetails.setText(String.format("%s\n\nAuthor: %s\n\nSummary:\n%s", title, authors, description));
+
+            // Show and hide appropriate panes
             bookPane.setVisible(true);
             gridPane.setVisible(false);
-
             GaussianBlur gaussianBlur = new GaussianBlur();
             bookShelfBack.setEffect(gaussianBlur);
         });
-
-        Image wholeBook = getWholeImageForBook(book);
-
-    wholeBookImg.setImage(wholeBook);
-
-    String detailsTxt = String.format("%s\n\nAuthor: %s\n\nSummary:\n%s",
-            book.getString("title"), authors.toString(), description);
-    bookDetails.setText(detailsTxt);
-
-
-        bookPane.setVisible(false);
     }
+
 
     @FXML
     private TextField userText;
 
-    private String currentBookTitle; // Assume this is set when a book is clicked
+    private String currentBookTitle;
     private int guessCount = 0;
 
     @FXML
+    private String updateDisplayedTitle(String userInput) {
+        StringBuilder displayedTitle = new StringBuilder();
+        String[] words = currentBookTitle.split(" ");
+        for (String word : words) {
+            if (word.equalsIgnoreCase("the") || word.equalsIgnoreCase("and") || word.equalsIgnoreCase("or") || word.contains(":")) {
+                displayedTitle.append(word); // Automatically display these words
+            } else {
+                for (int i = 0; i < word.length(); i++) {
+                    char c = word.charAt(i);
+                    if (userInput.indexOf(c) >= 0 || c == ':' || c == '\'' || c == '-') {
+                        displayedTitle.append(c); // Display guessed letters and specific punctuation
+                    } else {
+                        displayedTitle.append('_'); // Display underscores for unguessed letters
+                    }
+                }
+            }
+            displayedTitle.append(" "); // Add a space after each word
+        }
+
+        return displayedTitle.toString().trim(); // Trim the trailing space
+    }
+
+    @FXML
     private void userGuess() {
-        String userInput = userText.getText();
-        StringBuilder filteredInput = new StringBuilder();
+        String userInput = userText.getText().toLowerCase();
+        StringBuilder allGuesses = new StringBuilder(); // This should ideally be a class variable
 
         if (currentBookTitle == null) {
             System.out.println("No book selected or title not set");
-            // Optionally clear the userText or inform the user to select a book first
             userText.setText("");
             return; // Exit the method early
         }
-        // Increase guess count
         guessCount++;
 
-        // Filter characters
-        for (int i = 0; i < userInput.length(); i++) {
-            char c = userInput.charAt(i);
-            if (currentBookTitle.contains(String.valueOf(c))) {
-                filteredInput.append(c);
+        // Add the current guess to all previous guesses (you may want to ensure no duplicate characters)
+        for (char c : userInput.toCharArray()) {
+            if (allGuesses.indexOf(String.valueOf(c)) < 0) { // Avoid duplicate guesses
+                allGuesses.append(c);
             }
         }
 
-        userText.setText(filteredInput.toString());
+        // Update displayed title
+        String displayedTitle = updateDisplayedTitle(allGuesses.toString());
+        userText.setText(displayedTitle);
 
         // Check if the guess is correct or if the user has guessed three times
-        if (userText.getText().equalsIgnoreCase(currentBookTitle) || guessCount >= 3) {
+        if (displayedTitle.replace(" ", "").equalsIgnoreCase(currentBookTitle.replace(" ", "")) || guessCount >= 3) {
             bookPane.setVisible(false);
             gridPane.setVisible(true);
             bookShelfBack.setEffect(null); // Remove blur
 
-            if (guessCount >= 3 && !userText.getText().equalsIgnoreCase(currentBookTitle)) {
+            if (guessCount >= 3 && !displayedTitle.equalsIgnoreCase(currentBookTitle)) {
                 // Shake gridPane and fade random ImageViews
                 shakeGridPane();
                 fadeRandomImages();
@@ -266,15 +274,12 @@ public class Game {
         }
     }
 
+
     private void shakeGridPane() {
         TranslateTransition tt = new TranslateTransition(Duration.millis(100), gridPane);
         tt.setByX(5);
         tt.setCycleCount(6);
         tt.setAutoReverse(true);
-
-        tt.setOnFinished(event -> {
-            // If you need to perform any action after shaking ends, you can do it here
-        });
 
         tt.play();
     }
@@ -282,19 +287,19 @@ public class Game {
 
     private void fadeRandomImages() {
         Random rand = new Random();
-        List<Node> children = new ArrayList<>(gridPane.getChildren()); // Get all children of the gridPane
-        int numberOfImagesToFade = 3; // Adjust as needed, based on your UI design
+        List<Node> children = new ArrayList<>(gridPane.getChildren());
+        int numberOfImagesToFade = 3;
 
-        // Shuffle the list to randomize which images are selected
+        // Shuffle the list to randomize which images will fade
         Collections.shuffle(children, rand);
 
         for (int i = 0; i < Math.min(numberOfImagesToFade, children.size()); i++) {
             Node child = children.get(i);
             if (child instanceof ImageView) {
                 FadeTransition ft = new FadeTransition(Duration.seconds(1), child);
-                ft.setToValue(0); // Fade to completely transparent
+                ft.setToValue(0); // Fade to transparent
                 ft.setOnFinished(event -> {
-                    child.setVisible(false); // Optionally make the node invisible after fade out
+                    child.setVisible(false); // make the node invisible after fade out
                     // Remove click event
                     child.setOnMouseClicked(null);
                 });
@@ -302,5 +307,4 @@ public class Game {
             }
         }
     }
-
 }

@@ -57,7 +57,13 @@
             <HBox.margin>
                <Insets left="200.0" top="150.0" />
             </HBox.margin></TextField>
-            <Button onAction="#userGuess" text="Submit Guess" />
+            <Button alignment="CENTER" onAction="#userGuess" prefHeight="26.0" prefWidth="67.0" text="Submit" textAlignment="CENTER">
+            <HBox.margin>
+               <Insets right="125.0" top="250.0" />
+            </HBox.margin>
+            <padding>
+               <Insets left="100.0" />
+            </padding></Button>
          </HBox>
 
       </Pane>
