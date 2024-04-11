@@ -46,7 +46,6 @@ public class Game {
     }
 
     private final BooksAPI apiService = new BooksAPI();
-
     @FXML
     public GridPane gridPane;
 
@@ -119,7 +118,6 @@ public class Game {
                 bookIndex++;
             }
         }
-
     }
 
     // Test function to update the testing text area with all titles from API
@@ -146,6 +144,11 @@ public class Game {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void score(){
+
     }
 
     @FXML
@@ -206,7 +209,6 @@ public class Game {
 
     @FXML
     private TextField userText;
-
     private String currentBookTitle;
     private int guessCount = 0;
 
