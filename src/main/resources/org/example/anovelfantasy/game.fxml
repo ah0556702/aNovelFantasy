@@ -37,7 +37,7 @@
             <RowConstraints maxHeight="168.4" minHeight="10.0" prefHeight="72.99999999999997" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <TextArea fx:id="testing" layoutX="516.0" layoutY="112.0" prefHeight="331.0" prefWidth="235.0" styleClass="testAPI" />
+
 
    </children>
 
@@ -57,12 +57,32 @@
             <HBox.margin>
                <Insets left="200.0" top="150.0" />
             </HBox.margin></TextField>
-            <Button alignment="CENTER" ellipsisString="  Submit " onAction="#userGuess" prefHeight="26.0" prefWidth="107.0" text="Submit" textAlignment="CENTER" wrapText="true">
+            <Button alignment="CENTER" ellipsisString="Submit" onAction="#userGuess" prefHeight="26.0" prefWidth="67.0" text="Submit" wrapText="true">
             <HBox.margin>
                <Insets right="125.0" top="250.0" />
             </HBox.margin></Button>
          </HBox>
 
       </Pane>
+   <TabPane fx:id="tabPane" layoutX="527.0" layoutY="53.0" prefHeight="452.0" prefWidth="247.0" tabClosingPolicy="UNAVAILABLE">
+     <tabs>
+        <Tab text="API Response">
+           <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <TextArea fx:id="testing" layoutX="516.0" layoutY="112.0" prefHeight="331.0" prefWidth="235.0" styleClass="testAPI" />
+           </content>
+        </Tab>
+       <Tab text="Score">
+         <content>
+           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="402.0" prefWidth="200.0" />
+         </content>
+       </Tab>
+       <Tab text="Game Play">
+         <content>
+           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+         </content>
+       </Tab>
+     </tabs>
+   </TabPane>
 
 </AnchorPane>

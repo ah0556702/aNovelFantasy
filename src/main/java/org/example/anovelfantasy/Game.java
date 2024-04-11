@@ -6,10 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Orientation;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.Separator;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -48,14 +45,13 @@ public class Game {
     private final BooksAPI apiService = new BooksAPI();
     @FXML
     public GridPane gridPane;
-
     @FXML
     private TextArea testing;
     @FXML
     private Pane bookPane;
-
     @FXML
     private ImageView bookShelfBack;
+
     @FXML
     private void initialize() throws Exception {
         updateTestingTextArea();
@@ -152,6 +148,9 @@ public class Game {
     }
 
     @FXML
+    private TabPane tabPane;
+
+    @FXML
     String[] bookImages = {
             "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\wholeBook\\blueGreen.png",
             "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\wholeBook\\brown.png",
@@ -200,12 +199,12 @@ public class Game {
 
             // Show and hide appropriate panes
             bookPane.setVisible(true);
+            tabPane.setVisible(false);
             gridPane.setVisible(false);
             GaussianBlur gaussianBlur = new GaussianBlur();
             bookShelfBack.setEffect(gaussianBlur);
         });
     }
-
 
     @FXML
     private TextField userText;
