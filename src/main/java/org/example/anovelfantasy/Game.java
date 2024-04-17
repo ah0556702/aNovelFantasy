@@ -163,6 +163,10 @@ public class Game {
             "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\wholeBook\\silverPurple.png"
     };
 
+    String[] bookImg = {
+            "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\openBook.webp"
+    };
+
     @FXML
     private ImageView wholeBookImg;
 
@@ -192,6 +196,7 @@ public class Game {
 
             // Set the cover image
             Image wholeBook = new Image(new File(bookImages[imageIndex % bookImages.length]).toURI().toString());
+            //Image wholeBook = new Image(new File(bookImg[0]).toURI().toString());
             wholeBookImg.setImage(wholeBook);
 
             // Update book details
@@ -228,6 +233,7 @@ public class Game {
                     }
                 }
             }
+
             displayedTitle.append(" "); // Add a space after each word
         }
 
@@ -261,6 +267,7 @@ public class Game {
         if (displayedTitle.replace(" ", "").equalsIgnoreCase(currentBookTitle.replace(" ", "")) || guessCount >= 3) {
             bookPane.setVisible(false);
             gridPane.setVisible(true);
+            tabPane.setVisible(true);
             bookShelfBack.setEffect(null); // Remove blur
 
             if (guessCount >= 3 && !displayedTitle.equalsIgnoreCase(currentBookTitle)) {

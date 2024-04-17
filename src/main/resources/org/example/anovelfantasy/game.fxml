@@ -41,25 +41,24 @@
 
    </children>
 
-      <Pane fx:id="bookPane" layoutX="75.0" layoutY="61.0" maxHeight="427.0" maxWidth="649.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="649.0" visible="false">
-         <ImageView fx:id="wholeBookImg" fitHeight="427.0" fitWidth="650.0">
+      <Pane fx:id="bookPane" layoutX="75.0" layoutY="61.0" maxHeight="427.0" maxWidth="649.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="700.0" visible="false">
+         <ImageView fx:id="wholeBookImg" fitHeight="427.0" fitWidth="649.0">
          <effect>
             <DropShadow />
          </effect></ImageView>
-         <HBox prefHeight="427.0" prefWidth="650.0">
+         <HBox prefHeight="427.0" prefWidth="900.0">
 
-            <Label fx:id="bookDetails" maxHeight="100" maxWidth="175" minWidth="175" prefWidth="175" styleClass="bookDetails" wrapText="true">
+            <Label fx:id="bookDetails" maxHeight="285.0" maxWidth="210.0" minWidth="175" prefHeight="285.0" prefWidth="179.0" styleClass="bookDetails" wrapText="true">
             <HBox.margin>
                <Insets left="60.0" top="75.0" />
             </HBox.margin></Label>
-            <TextField fx:id="userText" prefHeight="29.0" prefWidth="151.0" styleClass="transparent-text-field">
-
+            <TextField fx:id="userText" prefHeight="30.0" prefWidth="212.0" styleClass="transparent-text-field">
             <HBox.margin>
-               <Insets left="200.0" top="150.0" />
+               <Insets left="200.0" top="125.0" />
             </HBox.margin></TextField>
             <Button alignment="CENTER" ellipsisString="Submit" onAction="#userGuess" prefHeight="26.0" prefWidth="67.0" text="Submit" wrapText="true">
             <HBox.margin>
-               <Insets right="125.0" top="250.0" />
+               <Insets right="370.0" top="250.0" />
             </HBox.margin></Button>
          </HBox>
 
