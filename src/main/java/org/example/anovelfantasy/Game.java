@@ -216,6 +216,30 @@ public class Game {
     private String currentBookTitle;
     private int guessCount = 0;
 
+//    @FXML
+//    private String updateDisplayedTitle(String userInput) {
+//        StringBuilder displayedTitle = new StringBuilder();
+//        String[] words = currentBookTitle.split(" ");
+//        for (String word : words) {
+//            if (word.equalsIgnoreCase("the") || word.equalsIgnoreCase("and") || word.equalsIgnoreCase("or") || word.contains(":")) {
+//                displayedTitle.append(word); // Automatically display these words
+//            } else {
+//                for (int i = 0; i < word.length(); i++) {
+//                    char c = word.charAt(i);
+//                    if (userInput.toLowerCase().indexOf(c) >= 0 || c == ':' || c == '\'' || c == '-') {
+//                        displayedTitle.append(c); // Display guessed letters and specific punctuation
+//                    } else {
+//                        displayedTitle.append('_'); // Display underscores for unguessed letters
+//                    }
+//                }
+//            }
+//
+//            displayedTitle.append(" "); // Add a space after each word
+//        }
+//
+//        return displayedTitle.toString().trim(); // Trim the trailing space
+//    }
+
     @FXML
     private String updateDisplayedTitle(String userInput) {
         StringBuilder displayedTitle = new StringBuilder();
@@ -226,8 +250,13 @@ public class Game {
             } else {
                 for (int i = 0; i < word.length(); i++) {
                     char c = word.charAt(i);
-                    if (userInput.indexOf(c) >= 0 || c == ':' || c == '\'' || c == '-') {
-                        displayedTitle.append(c); // Display guessed letters and specific punctuation
+                    if (userInput.toLowerCase().indexOf(Character.toLowerCase(c)) >= 0 || c == ':' || c == '\'' || c == '-') {
+                        if (i == 0) {
+                            // Display the first letter with its original casing
+                            displayedTitle.append(word.charAt(0));
+                        } else {
+                            displayedTitle.append(c); // Display guessed letters and specific punctuation
+                        }
                     } else {
                         displayedTitle.append('_'); // Display underscores for unguessed letters
                     }
@@ -240,6 +269,8 @@ public class Game {
         return displayedTitle.toString().trim(); // Trim the trailing space
     }
 
+    @FXML Label scoreLabel;
+    private int score = 0;
     @FXML
     private void userGuess() {
         String userInput = userText.getText().toLowerCase();
@@ -250,6 +281,7 @@ public class Game {
             userText.setText("");
             return; // Exit the method early
         }
+
         guessCount++;
 
         // Add the current guess to all previous guesses (you may want to ensure no duplicate characters)
@@ -276,11 +308,45 @@ public class Game {
                 fadeRandomImages();
             }
 
+            updateScore(guessCount);
+            reappearBooks(guessCount);
+
             // Reset for the next guess
             guessCount = 0;
             userText.setText("");
         }
     }
+
+    private void updateScore(int attempts) {
+        int pointsEarned = 0;
+        if (attempts == 1) {
+            pointsEarned = 50;
+        } else if (attempts == 2) {
+            pointsEarned = 30;
+        } else if (attempts == 3) {
+            pointsEarned = 15;
+        }
+        score += pointsEarned;
+        scoreLabel.setText("Score: " + score);
+    }
+
+    private void reappearBooks(int attempts) {
+        int booksToReappear = Math.min(3 - attempts, 3); // Calculate number of books to reappear
+        if (booksToReappear > 0) {
+            List<Node> children = new ArrayList<>(gridPane.getChildren());
+            Collections.shuffle(children);
+            for (int i = 0; i < Math.min(booksToReappear, children.size()); i++) {
+                Node child = children.get(i);
+                if (child instanceof ImageView && !child.isVisible()) {
+                    FadeTransition ft = new FadeTransition(Duration.seconds(1), child);
+                    ft.setToValue(1); // Fade in
+                    ft.setOnFinished(event -> child.setVisible(true));
+                    ft.play();
+                }
+            }
+        }
+    }
+
 
 
     private void shakeGridPane() {
@@ -316,3 +382,4 @@ public class Game {
         }
     }
 }
+
