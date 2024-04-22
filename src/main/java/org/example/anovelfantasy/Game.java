@@ -1,9 +1,11 @@
 package org.example.anovelfantasy;
 
+import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Orientation;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -21,23 +23,16 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-import javafx.animation.FadeTransition;
-import javafx.scene.Node;
-import javafx.util.Duration;
-import java.util.Random;
+import java.util.*;
 
 public class Game {
 
     public static void show(Scene current) {
-        try{
+        try {
             FXMLLoader loader = new FXMLLoader(Game.class.getResource("game.fxml"));
             Parent root = loader.load();
             current.setRoot(root);
-        } catch( IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -58,14 +53,14 @@ public class Game {
         // Load image paths
         String[] imgPaths = {
                 "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\blueGreenR.png",
-        "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\brownR.png",
-        "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\darkBlueR.png",
-        "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\greyR.png",
-        "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\maroonR.png",
-        "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\orangeR.png",
-        "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\purpleR.png",
-        "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\royalBlueR.png",
-        "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\silverPurpleR.png"
+                "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\brownR.png",
+                "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\darkBlueR.png",
+                "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\greyR.png",
+                "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\maroonR.png",
+                "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\orangeR.png",
+                "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\purpleR.png",
+                "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\royalBlueR.png",
+                "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\bookBindings\\silverPurpleR.png"
         };
 
         // Create a list to store Image objects
@@ -143,7 +138,7 @@ public class Game {
     }
 
     @FXML
-    private void score(){
+    private void score() {
 
     }
 
@@ -174,17 +169,17 @@ public class Game {
     private Label bookDetails;
 
     @FXML
-        private Image getWholeImageForBook(JSONObject book) {
+    private Image getWholeImageForBook(JSONObject book) {
 
-            Random randNum = new Random(bookImages.length); // random number generated
-            int num = randNum.nextInt(bookImages.length); // random number cast to int
-            File file = new File(bookImages[num]); // picks an image from the bookImages array at random
-            String imagePath = file.toURI().toString();
-            return new Image(imagePath);
-        }
+        Random randNum = new Random(bookImages.length); // random number generated
+        int num = randNum.nextInt(bookImages.length); // random number cast to int
+        File file = new File(bookImages[num]); // picks an image from the bookImages array at random
+        String imagePath = file.toURI().toString();
+        return new Image(imagePath);
+    }
 
     @FXML
-    private void setClickEvent(ImageView imageView, String title, int bookIndex, JSONObject book, String authors, int imageIndex){
+    private void setClickEvent(ImageView imageView, String title, int bookIndex, JSONObject book, String authors, int imageIndex) {
         imageView.setOnMouseClicked(event -> {
             String description = book.optString("description", "No description available.");
 
@@ -216,30 +211,6 @@ public class Game {
     private String currentBookTitle;
     private int guessCount = 0;
 
-//    @FXML
-//    private String updateDisplayedTitle(String userInput) {
-//        StringBuilder displayedTitle = new StringBuilder();
-//        String[] words = currentBookTitle.split(" ");
-//        for (String word : words) {
-//            if (word.equalsIgnoreCase("the") || word.equalsIgnoreCase("and") || word.equalsIgnoreCase("or") || word.contains(":")) {
-//                displayedTitle.append(word); // Automatically display these words
-//            } else {
-//                for (int i = 0; i < word.length(); i++) {
-//                    char c = word.charAt(i);
-//                    if (userInput.toLowerCase().indexOf(c) >= 0 || c == ':' || c == '\'' || c == '-') {
-//                        displayedTitle.append(c); // Display guessed letters and specific punctuation
-//                    } else {
-//                        displayedTitle.append('_'); // Display underscores for unguessed letters
-//                    }
-//                }
-//            }
-//
-//            displayedTitle.append(" "); // Add a space after each word
-//        }
-//
-//        return displayedTitle.toString().trim(); // Trim the trailing space
-//    }
-
     @FXML
     private String updateDisplayedTitle(String userInput) {
         StringBuilder displayedTitle = new StringBuilder();
@@ -269,8 +240,10 @@ public class Game {
         return displayedTitle.toString().trim(); // Trim the trailing space
     }
 
-    @FXML Label scoreLabel;
+    @FXML
+    Label scoreLabel;
     private int score = 0;
+
     @FXML
     private void userGuess() {
         String userInput = userText.getText().toLowerCase();
@@ -297,6 +270,18 @@ public class Game {
 
         // Check if the guess is correct or if the user has guessed three times
         if (displayedTitle.replace(" ", "").equalsIgnoreCase(currentBookTitle.replace(" ", "")) || guessCount >= 3) {
+            if (displayedTitle.replace(" ", "").equalsIgnoreCase(currentBookTitle.replace(" ", ""))) {
+                decrementVisibleBooksCount();
+                // Remove the guessed book from the grid
+                removeGuessedBook();
+            }
+
+            // Check if this is the last visible book and it's being guessed wrong three times
+            if (getVisibleBooksCount() == 1 && guessCount >= 3) {
+                // Trigger GameOver
+                GameOver.show(gridPane.getScene());
+            }
+
             bookPane.setVisible(false);
             gridPane.setVisible(true);
             tabPane.setVisible(true);
@@ -317,6 +302,31 @@ public class Game {
         }
     }
 
+    private int visibleBooksCount = 0;
+    private List<Node> disappearedBooks = new ArrayList<>(); // Track disappeared books
+
+    // Method to decrement the count of visible books
+    private void decrementVisibleBooksCount() {
+        visibleBooksCount--;
+    }
+
+    // Method to get the count of visible books
+    private int getVisibleBooksCount() {
+        return visibleBooksCount;
+    }
+
+    // Method to remove the guessed book from the grid
+    private void removeGuessedBook() {
+        for (Node node : gridPane.getChildren()) {
+            if (node instanceof ImageView && node.isVisible()) {
+                disappearedBooks.add(node); // Add the guessed book to the disappeared books list
+                node.setVisible(false); // Hide the guessed book from the grid
+                decrementVisibleBooksCount();
+                break; // Stop after removing the first visible book
+            }
+        }
+    }
+
     private void updateScore(int attempts) {
         int pointsEarned = 0;
         if (attempts == 1) {
@@ -333,21 +343,18 @@ public class Game {
     private void reappearBooks(int attempts) {
         int booksToReappear = Math.min(3 - attempts, 3); // Calculate number of books to reappear
         if (booksToReappear > 0) {
-            List<Node> children = new ArrayList<>(gridPane.getChildren());
-            Collections.shuffle(children);
-            for (int i = 0; i < Math.min(booksToReappear, children.size()); i++) {
-                Node child = children.get(i);
-                if (child instanceof ImageView && !child.isVisible()) {
-                    FadeTransition ft = new FadeTransition(Duration.seconds(1), child);
-                    ft.setToValue(1); // Fade in
-                    ft.setOnFinished(event -> child.setVisible(true));
-                    ft.play();
-                }
+            Collections.shuffle(disappearedBooks); // Shuffle the disappeared books list
+            for (int i = 0; i < Math.min(booksToReappear, disappearedBooks.size()); i++) {
+                Node book = disappearedBooks.get(i);
+                book.setVisible(true); // Reappear the disappeared book
+                incrementVisibleBooksCount();
             }
         }
     }
 
-
+    private void incrementVisibleBooksCount() {
+        visibleBooksCount++;
+    }
 
     private void shakeGridPane() {
         TranslateTransition tt = new TranslateTransition(Duration.millis(100), gridPane);
@@ -358,11 +365,10 @@ public class Game {
         tt.play();
     }
 
-
     private void fadeRandomImages() {
         Random rand = new Random();
         List<Node> children = new ArrayList<>(gridPane.getChildren());
-        int numberOfImagesToFade = 3;
+        int numberOfImagesToFade = 5;
 
         // Shuffle the list to randomize which images will fade
         Collections.shuffle(children, rand);
@@ -382,4 +388,3 @@ public class Game {
         }
     }
 }
-

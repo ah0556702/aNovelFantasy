@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="loadingAnchor" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.anovelfantasy.GameOver">
+   <children>
+      <VBox prefHeight="400.0" prefWidth="600.0" styleClass="gameOverBox">
+         <children>
+            <Label text="Game Over">
+               <font>
+                  <Font name="System Bold" size="48.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="180.0" />
+               </VBox.margin>
+            </Label>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button id="playAgain" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Play Again">
+                     <HBox.margin>
+                        <Insets left="220.0" />
+                     </HBox.margin></Button>
+                <Button id="quit" mnemonicParsing="false" text="Quit">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin></Button>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <ButtonBar prefHeight="40.0" prefWidth="200.0">
+               <VBox.margin>
+                  <Insets top="250.0" />
+               </VBox.margin>
+            </ButtonBar>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
