@@ -80,8 +80,8 @@
                            <Label fx:id="scoreLabel" text="Label" />
                            <ButtonBar prefHeight="40.0" prefWidth="200.0">
                              <buttons>
-                                 <Button mnemonicParsing="false" text="Exit" />
-                                 <Button mnemonicParsing="false" text="Choose a Different Level" />
+                                 <Button fx:id="exitBtn" onAction="#exitGame" mnemonicParsing="false" text="Exit" />
+                                 <Button fx:id="playAgainBtn" onAction="#handlePlayAgain" prefHeight="26.0" prefWidth="113.0" text="Play Again" />
                              </buttons>
                            </ButtonBar>
                         </children>

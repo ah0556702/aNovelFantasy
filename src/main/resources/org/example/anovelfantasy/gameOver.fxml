@@ -19,11 +19,11 @@
             </Label>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button id="playAgain" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Play Again">
+                  <Button fx:id="playAgainBtn" onAction="#handlePlayAgain" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Play Again">
                      <HBox.margin>
                         <Insets left="220.0" />
                      </HBox.margin></Button>
-                <Button id="quit" mnemonicParsing="false" text="Quit">
+                <Button fx:id="exitBtn" onAction="#exitGame" mnemonicParsing="false" text="Quit">
                      <HBox.margin>
                         <Insets left="50.0" />
                      </HBox.margin></Button>
