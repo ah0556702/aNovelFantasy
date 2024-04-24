@@ -6,11 +6,33 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 
 public class GameOver {
+
+    @FXML
+    private Label scoreLabel;
+
+    public void setScore(Label score) {
+        scoreLabel.setText("Score: " + score);
+    }
+    public GameOver(int score) {
+    }
+
+    @FXML
+    private Text scoreTxt;
+
+    public GameOver() {
+        // This constructor is needed by FXMLLoader
+    }
+
+//    public GameOver(Label score){
+//        this.score = score;
+//    }
     public static void show(Scene current) {
         try{
             FXMLLoader loader = new FXMLLoader(Game.class.getResource("gameOver.fxml"));
@@ -46,10 +68,12 @@ public class GameOver {
         }
     }
 
-    @FXML Button exitBtn;
+    @FXML
+    Button exitBtn;
 
     @FXML
     private void exitGame(){
         Platform.exit();
     }
+
 }

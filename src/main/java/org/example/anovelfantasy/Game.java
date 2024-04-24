@@ -245,64 +245,6 @@ public class Game {
     Label scoreLabel;
     private int score = 0;
 
-//    @FXML
-//    private void userGuess() {
-//        String userInput = userText.getText().toLowerCase();
-//        StringBuilder allGuesses = new StringBuilder(); // This should ideally be a class variable
-//
-//        if (currentBookTitle == null) {
-//            System.out.println("No book selected or title not set");
-//            userText.setText("");
-//            return; // Exit the method early
-//        }
-//
-//        guessCount++;
-//
-//        // Add the current guess to all previous guesses (you may want to ensure no duplicate characters)
-//        for (char c : userInput.toCharArray()) {
-//            if (allGuesses.indexOf(String.valueOf(c)) < 0) { // Avoid duplicate guesses
-//                allGuesses.append(c);
-//            }
-//        }
-//
-//        // Update displayed title
-//        String displayedTitle = updateDisplayedTitle(allGuesses.toString());
-//        userText.setText(displayedTitle);
-//
-//        // Check if the guess is correct or if the user has guessed three times
-//        if (displayedTitle.replace(" ", "").equalsIgnoreCase(currentBookTitle.replace(" ", "")) || guessCount >= 3) {
-//            if (displayedTitle.replace(" ", "").equalsIgnoreCase(currentBookTitle.replace(" ", ""))) {
-//                decrementVisibleBooksCount();
-//                // Remove the guessed book from the grid
-//                removeGuessedBook();
-//            }
-//
-//            // Check if this is the last visible book and it's being guessed wrong three times
-//            if (getVisibleBooksCount() == 1 && guessCount >= 3) {
-//                // Trigger GameOver
-//                GameOver.show(gridPane.getScene());
-//            }
-//
-//            bookPane.setVisible(false);
-//            gridPane.setVisible(true);
-//            tabPane.setVisible(true);
-//            bookShelfBack.setEffect(null); // Remove blur
-//
-//            if (guessCount >= 3 && !displayedTitle.equalsIgnoreCase(currentBookTitle)) {
-//                // Shake gridPane and fade random ImageViews
-//                shakeGridPane();
-//                fadeRandomImages();
-//            }
-//
-//            updateScore(guessCount);
-//            reappearBooks(guessCount);
-//
-//            // Reset for the next guess
-//            guessCount = 0;
-//            userText.setText("");
-//        }
-//    }
-
     @FXML
     private void userGuess() {
         String userInput = userText.getText().toLowerCase();
@@ -338,7 +280,10 @@ public class Game {
             // Check if there's only one visible book left on the shelf
             if (getVisibleBooksCount() == 1) {
                 // Trigger GameOver
-                GameOver.show(gridPane.getScene());
+                // In the Game class
+                GameOver gameOver = new GameOver(score);
+                //gameOver.setScore(score); // Assuming `score` is the variable holding the score
+                gameOver.show(gridPane.getScene());
                 return; // Exit the method early
             }
 
@@ -362,8 +307,6 @@ public class Game {
         }
     }
 
-
-
     private int visibleBooksCount = 0;
     private List<Node> disappearedBooks = new ArrayList<>(); // Track disappeared books
 
@@ -371,11 +314,6 @@ public class Game {
     private void decrementVisibleBooksCount() {
         visibleBooksCount--;
     }
-
-    // Method to get the count of visible books
-//    private int getVisibleBooksCount() {
-//        return visibleBooksCount;
-//    }
 
     private int getVisibleBooksCount() {
         int count = 0;
@@ -386,18 +324,6 @@ public class Game {
         }
         return count;
     }
-
-    //Method to remove the guessed book from the grid
-//    private void removeGuessedBook() {
-//        for (Node node : gridPane.getChildren()) {
-//            if (node instanceof ImageView && node.isVisible()) {
-//                disappearedBooks.add(node); // Add the guessed book to the disappeared books list
-//                node.setVisible(false); // Hide the guessed book from the grid
-//                decrementVisibleBooksCount();
-//                break; // Stop after removing the first visible book
-//            }
-//        }
-//    }
 
     private void removeGuessedBook() {
         for (Node node : gridPane.getChildren()) {
