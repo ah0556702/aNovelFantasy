@@ -275,6 +275,10 @@ public class Game {
             if (!displayedTitle.replace(" ", "").equalsIgnoreCase(currentBookTitle.replace(" ", ""))) {
                 decrementVisibleBooksCount();
                 removeGuessedBook(); // Remove the guessed book from the grid
+                updateScore(0); // Decrement score by 15 for wrong guesses
+            } else {
+                // Update the score based on the number of attempts
+                updateScore(guessCount);
             }
 
             // Check if there's only one visible book left on the shelf
@@ -298,7 +302,6 @@ public class Game {
                 fadeRandomImages();
             }
 
-            updateScore(guessCount);
             reappearBooks(guessCount);
 
             // Reset for the next guess
@@ -335,7 +338,7 @@ public class Game {
         }
     }
 
-
+    @FXML
     private void updateScore(int attempts) {
         int pointsEarned = 0;
         if (attempts == 1) {
@@ -345,9 +348,22 @@ public class Game {
         } else if (attempts == 3) {
             pointsEarned = 15;
         }
-        score += pointsEarned;
+
+        // Decrement the score by 15 if the attempt was unsuccessful
+        if (pointsEarned == 0) {
+            score -= 15;
+        } else {
+            score += pointsEarned;
+        }
+
+        // Ensure the score doesn't go below 0
+        if (score < 0) {
+            score = 0;
+        }
+
         scoreLabel.setText("Score: " + score);
     }
+
 
     private void reappearBooks(int attempts) {
         int booksToReappear = Math.min(3 - attempts, 3); // Calculate number of books to reappear
