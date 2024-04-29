@@ -30,9 +30,6 @@ public class GameOver {
         // This constructor is needed by FXMLLoader
     }
 
-//    public GameOver(Label score){
-//        this.score = score;
-//    }
     public static void show(Scene current) {
         try{
             FXMLLoader loader = new FXMLLoader(Game.class.getResource("gameOver.fxml"));

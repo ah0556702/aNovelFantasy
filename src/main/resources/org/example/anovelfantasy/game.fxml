@@ -50,16 +50,26 @@
 
             <Label fx:id="bookDetails" maxHeight="285.0" maxWidth="210.0" minWidth="175" prefHeight="285.0" prefWidth="179.0" styleClass="bookDetails" wrapText="true">
             <HBox.margin>
-               <Insets left="60.0" top="75.0" />
-            </HBox.margin></Label>
-            <TextField fx:id="userText" prefHeight="30.0" prefWidth="212.0" styleClass="transparent-text-field">
+               <Insets left="50.0" top="50.0" />
+            </HBox.margin>
+         </Label>
+         <VBox prefHeight="427.0" prefWidth="203.0">
+            <children>
+                  <TextField fx:id="userText" prefHeight="30.0" prefWidth="50.0" styleClass="transparent-text-field">
+                  <VBox.margin>
+                     <Insets top="100.0" />
+                  </VBox.margin>
+               </TextField>
+                  <Button alignment="CENTER" ellipsisString="Submit" onAction="#userGuess" prefHeight="26.0" prefWidth="128.0" text="Submit" wrapText="true">
+                  <VBox.margin>
+                     <Insets left="10.0" top="125.0" />
+                  </VBox.margin>
+               </Button>
+            </children>
             <HBox.margin>
-               <Insets left="200.0" top="125.0" />
-            </HBox.margin></TextField>
-            <Button alignment="CENTER" ellipsisString="Submit" onAction="#userGuess" prefHeight="26.0" prefWidth="67.0" text="Submit" wrapText="true">
-            <HBox.margin>
-               <Insets right="370.0" top="250.0" />
-            </HBox.margin></Button>
+               <Insets left="195.0" />
+            </HBox.margin>
+         </VBox>
          </HBox>
 
       </Pane>
@@ -80,7 +90,7 @@
                            <Label fx:id="scoreLabel" text="Label" />
                            <ButtonBar prefHeight="40.0" prefWidth="200.0">
                              <buttons>
-                                 <Button fx:id="exitBtn" onAction="#exitGame" mnemonicParsing="false" text="Exit" />
+                                 <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exitGame" text="Exit" />
                                  <Button fx:id="playAgainBtn" onAction="#handlePlayAgain" prefHeight="26.0" prefWidth="113.0" text="Play Again" />
                              </buttons>
                            </ButtonBar>

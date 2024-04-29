@@ -32,3 +32,8 @@
 .gameOverBox{
     -fx-background-color: white;
 }
+
+.bookDetails {
+    -fx-background-color: rgba(0, 0, 0, 0.5); /* Adjust the last parameter (alpha) to control transparency */
+    -fx-text-fill: white; /* Set text color to white for better visibility */
+}
