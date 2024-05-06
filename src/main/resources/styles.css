@@ -37,3 +37,32 @@
     -fx-background-color: rgba(0, 0, 0, 0.5); /* Adjust the last parameter (alpha) to control transparency */
     -fx-text-fill: white; /* Set text color to white for better visibility */
 }
+
+
+.no-text-area {
+    -fx-control-inner-background: transparent;
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-text-fill: black;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-border-width: 0px;
+    -fx-padding: 0px;
+    -fx-background-color: transparent;
+}
+
+.no-text-area .content {
+    -fx-background-color: transparent;
+}
+
+.no-text-area .scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+}
+
+.no-text-area .text-area {
+    -fx-background-color: transparent;
+    -fx-border-width: 0px;
+    -fx-padding: 0px;
+    -fx-background-insets: 0;
+}

@@ -139,28 +139,19 @@ public class Game {
     }
 
     @FXML
-    private void score() {
-
-    }
-
-    @FXML
     private TabPane tabPane;
 
     @FXML
     String[] bookImages = {
-            "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\wholeBook\\blueGreen.png",
-            "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\wholeBook\\brown.png",
-            "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\wholeBook\\darkBlue.png",
-            "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\wholeBook\\grey.png",
-            "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\wholeBook\\maroon.png",
-            "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\wholeBook\\orange.png",
-            "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\wholeBook\\purple.png",
-            "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\wholeBook\\royalBlue.png",
-            "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\wholeBook\\silverPurple.png"
-    };
-
-    String[] bookImg = {
-            "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\images\\openBook.webp"
+            "../../images/wholeBook/blueGreen.png",
+            "../../images/wholeBook/brown.png",
+            "../../images/wholeBook/darkBlue.png",
+            "../../images/wholeBook/grey.png",
+            "../../images/wholeBook/maroon.png",
+            "../../images/wholeBook/orange.png",
+            "../../images/wholeBook/purple.png",
+            "../../images/wholeBook/royalBlue.png",
+            "../../images/wholeBook/silverPurple.png"
     };
 
     @FXML
@@ -168,16 +159,6 @@ public class Game {
 
     @FXML
     private Label bookDetails;
-
-    @FXML
-    private Image getWholeImageForBook(JSONObject book) {
-
-        Random randNum = new Random(bookImages.length); // random number generated
-        int num = randNum.nextInt(bookImages.length); // random number cast to int
-        File file = new File(bookImages[num]); // picks an image from the bookImages array at random
-        String imagePath = file.toURI().toString();
-        return new Image(imagePath);
-    }
 
     @FXML
     private void setClickEvent(ImageView imageView, String title, int bookIndex, JSONObject book, String authors, int imageIndex) {
@@ -189,10 +170,10 @@ public class Game {
 
             // Update the text area with book details
             testing.setText(title + " " + authors + " " + description);
+            String imagePath = "/images/wholeBook/royalBlue.png";
+            Image wholeBook = new Image(getClass().getResourceAsStream(imagePath));
 
             // Set the cover image
-            Image wholeBook = new Image(new File(bookImages[imageIndex % bookImages.length]).toURI().toString());
-            //Image wholeBook = new Image(new File(bookImg[0]).toURI().toString());
             wholeBookImg.setImage(wholeBook);
 
             // Update book details

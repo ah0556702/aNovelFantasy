@@ -87,7 +87,7 @@
                   <children>
                      <VBox prefHeight="200.0" prefWidth="100.0">
                         <children>
-                           <Label fx:id="scoreLabel" text="Label" />
+                           <Label fx:id="scoreLabel" text="Score: " />
                            <ButtonBar prefHeight="40.0" prefWidth="200.0">
                              <buttons>
                                  <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exitGame" text="Exit" />
@@ -101,7 +101,31 @@
        </Tab>
        <Tab text="Game Play">
          <content>
-           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                     <VBox prefHeight="427.0" prefWidth="247.0">
+                        <children>
+                            <Label fx:id="gamePlay" text="Gameplay Rules: " />
+                            <TextArea prefHeight="394.0" prefWidth="239.0" wrapText="true" styleClass="no-text-area">
+                                - Guess the book title by entering letters.
+                              - You have up to 3 attempts to guess the title.
+                              - Earn points based on the number of attempts.
+
+                      </TextArea>
+                            <Label fx:id="scoreRules" text="Scoring: " />
+                            <TextArea prefHeight="325.0" prefWidth="178.0" wrapText="true" styleClass="no-text-area">
+
+                          - Correct Guess on First Attempt: +50 points
+                          - Correct Guess on Second Attempt: +30 points
+                          - Correct Guess on Third Attempt: +15 points
+                          - Incorrect Guess: -15 points
+
+                          Your current score will be displayed here.
+                          Good luck!
+                      </TextArea>
+                        </children>
+                     </VBox>
+                  </children></AnchorPane>
          </content>
        </Tab>
      </tabs>
