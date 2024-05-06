@@ -21,10 +21,5 @@ public class bookImages {
 
         // Create a list to store Image objects
         List<Image> images = new ArrayList<>();
-
-//        // Load each image into the list
-//        for (String path : imgPaths) {
-//            images.add(new Image(path));
-//        }
     }
 }
