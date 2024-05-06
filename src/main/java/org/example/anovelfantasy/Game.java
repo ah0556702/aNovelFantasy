@@ -160,11 +160,7 @@ public class Game {
         // Load each image into the list
         for (String path : imgPaths) {
             Image image = new Image(getClass().getResourceAsStream(path));
-            //URI uri = new File(path).toURI();
-            //String imagePath = path;
             images.add(image);
-
-            //Image wholeBook = new Image(getClass().getResourceAsStream(imagePath));
         }
 
         // Shuffle the images

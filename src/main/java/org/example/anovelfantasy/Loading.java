@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -29,10 +30,11 @@ public class Loading {
 
     @FXML
     public void initialize(){
-        String mediaPath = "C:\\Users\\snide\\IdeaProjects\\aNovelFantasy\\src\\main\\resources\\videos\\openBook.mp4";
 
-        Media media = new Media(new File(mediaPath).toURI().toString());
+        String mediaPath = "/videos/openBook.mp4";
+        Media media = new Media(getClass().getResource(mediaPath).toExternalForm());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
+
 
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // needs to be fixed, not looping
         mediaView.setMediaPlayer(mediaPlayer);
