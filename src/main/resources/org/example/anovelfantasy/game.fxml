@@ -5,6 +5,7 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="554.0" prefWidth="798.0" styleClass="gameAnchor" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.anovelfantasy.Game">
    <children>
@@ -59,10 +60,13 @@
                   <VBox.margin>
                      <Insets top="100.0" />
                   </VBox.margin>
+                  <font>
+                     <Font name="System Bold" size="12.0" />
+                  </font>
                </TextField>
                   <Button alignment="CENTER" ellipsisString="Submit" onAction="#userGuess" prefHeight="26.0" prefWidth="128.0" text="Submit" wrapText="true">
                   <VBox.margin>
-                     <Insets left="10.0" top="125.0" />
+                     <Insets left="25.0" top="125.0" />
                   </VBox.margin>
                </Button>
             </children>
@@ -73,27 +77,35 @@
          </HBox>
 
       </Pane>
-   <TabPane fx:id="tabPane" layoutX="527.0" layoutY="53.0" prefHeight="452.0" prefWidth="247.0" tabClosingPolicy="UNAVAILABLE">
+   <TabPane fx:id="tabPane" layoutX="527.0" layoutY="53.0" prefHeight="452.0" prefWidth="247.0" style="-fx-background-color: transparent;" tabClosingPolicy="UNAVAILABLE">
      <tabs>
-        <Tab text="API Response">
-           <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-              <TextArea fx:id="testing" layoutX="516.0" layoutY="112.0" prefHeight="331.0" prefWidth="235.0" styleClass="testAPI" />
-           </content>
-        </Tab>
        <Tab text="Score">
          <content>
            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="402.0" prefWidth="200.0">
                   <children>
-                     <VBox prefHeight="200.0" prefWidth="100.0">
+                     <VBox prefHeight="338.0" prefWidth="247.0">
                         <children>
-                           <Label fx:id="scoreLabel" text="Score: " />
-                           <ButtonBar prefHeight="40.0" prefWidth="200.0">
-                             <buttons>
-                                 <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exitGame" text="Exit" />
-                                 <Button fx:id="playAgainBtn" onAction="#handlePlayAgain" prefHeight="26.0" prefWidth="113.0" text="Play Again" />
-                             </buttons>
-                           </ButtonBar>
+                           <Label fx:id="scoreLabel" text="Score: ">
+                              <font>
+                                 <Font name="System Bold" size="24.0" />
+                              </font>
+                              <VBox.margin>
+                                 <Insets bottom="200.0" left="15.0" top="30.0" />
+                              </VBox.margin></Label>
+                           <VBox prefHeight="336.0" prefWidth="170.0">
+                              <children>
+                                 <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exitGame" prefHeight="26.0" prefWidth="108.0" text="Exit">
+                                    <VBox.margin>
+                                       <Insets bottom="50.0" left="65.0" />
+                                    </VBox.margin>
+                                 </Button>
+                                 <Button fx:id="playAgainBtn" onAction="#handlePlayAgain" prefHeight="26.0" prefWidth="113.0" text="Play Again">
+                                    <VBox.margin>
+                                       <Insets left="65.0" />
+                                    </VBox.margin>
+                                 </Button>
+                              </children>
+                           </VBox>
                         </children>
                      </VBox>
                   </children></AnchorPane>
@@ -105,29 +117,64 @@
                   <children>
                      <VBox prefHeight="427.0" prefWidth="247.0">
                         <children>
-                            <Label fx:id="gamePlay" text="Gameplay Rules: " />
-                            <TextArea prefHeight="394.0" prefWidth="239.0" wrapText="true" styleClass="no-text-area">
-                                - Guess the book title by entering letters.
-                              - You have up to 3 attempts to guess the title.
-                              - Earn points based on the number of attempts.
+                            <Label fx:id="gamePlay" text="Gameplay Rules: ">
+                              <VBox.margin>
+                                 <Insets bottom="10.0" top="50.0" />
+                              </VBox.margin>
+                              <font>
+                                 <Font name="System Bold" size="14.0" />
+                              </font>
+                              <padding>
+                                 <Insets left="60.0" />
+                              </padding></Label>
+                            <Label styleClass="no-text-area" text="- Guess the book title by entering letters." />
+                            <Label styleClass="no-text-area" text="- You have up to 3 attempts to guess the title." />
+                            <Label styleClass="no-text-area" text="- Earn points based on the number of attempts.">
+                              <VBox.margin>
+                                 <Insets bottom="30.0" />
+                              </VBox.margin></Label>
 
-                      </TextArea>
-                            <Label fx:id="scoreRules" text="Scoring: " />
-                            <TextArea prefHeight="325.0" prefWidth="178.0" wrapText="true" styleClass="no-text-area">
+                            <Label fx:id="scoreRules" text="Scoring: ">
+                              <VBox.margin>
+                                 <Insets bottom="10.0" left="85.0" />
+                              </VBox.margin>
+                              <font>
+                                 <Font name="System Bold" size="14.0" />
+                              </font></Label>
+                            <Label styleClass="no-text-area" text="- Correct Guess on 1st Attempt: +50 points" />
+                            <Label styleClass="no-text-area" text="- Correct Guess on 2nd Attempt: +30 points" />
+                            <Label styleClass="no-text-area" text="- Correct Guess on 3rd Attempt: +15 points" />
+                            <Label styleClass="no-text-area" text="- Incorrect Guess: -15 points" wrapText="true">
+                              <VBox.margin>
+                                 <Insets bottom="30.0" />
+                              </VBox.margin></Label>
 
-                          - Correct Guess on First Attempt: +50 points
-                          - Correct Guess on Second Attempt: +30 points
-                          - Correct Guess on Third Attempt: +15 points
-                          - Incorrect Guess: -15 points
+                            <Label styleClass="no-text-area" text="Your current score will be displayed here.">
+                              <VBox.margin>
+                                 <Insets bottom="10.0" />
+                              </VBox.margin>
+                              <font>
+                                 <Font size="13.0" />
+                              </font></Label>
+                            <Label styleClass="no-text-area" text="Good luck!">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                              <VBox.margin>
+                                 <Insets left="80.0" />
+                              </VBox.margin></Label>
 
-                          Your current score will be displayed here.
-                          Good luck!
-                      </TextArea>
                         </children>
                      </VBox>
                   </children></AnchorPane>
          </content>
        </Tab>
+         <Tab text="API Response">
+             <content>
+                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                 <TextArea fx:id="testing" layoutX="516.0" layoutY="112.0" prefHeight="331.0" prefWidth="235.0" style="-fx-background-color: #828A73;" styleClass="testAPI" />
+             </content>
+         </Tab>
      </tabs>
    </TabPane>
 

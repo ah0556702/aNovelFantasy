@@ -14,4 +14,5 @@
 
 17. Style Score label in tab pane
 18. Add game play
-19. Fix file paths
+
+20.

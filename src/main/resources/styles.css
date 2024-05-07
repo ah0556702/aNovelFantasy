@@ -22,11 +22,11 @@
 }
 
 .loadingAnchor {
-    -fx-background-color: white;
+    -fx-background-color: radial-gradient(center 50% 50%, radius 70%, lightskyblue, aliceblue, white);
 }
 
 .gameAnchor {
-    -fx-background-color: radial-gradient(center 50% 50%, radius 70%, lightskyblue, aliceblue, white);
+    -fx-background-color: linear-gradient(to bottom, #828A73, #BDC2B0);
 }
 
 .gameOverBox{
@@ -34,35 +34,65 @@
 }
 
 .bookDetails {
-    -fx-background-color: rgba(0, 0, 0, 0.5); /* Adjust the last parameter (alpha) to control transparency */
-    -fx-text-fill: white; /* Set text color to white for better visibility */
+    -fx-background-color: rgba(0, 0, 0, 0.5);
+    -fx-text-fill: white;
 }
 
-
-.no-text-area {
-    -fx-control-inner-background: transparent;
-    -fx-font-size: 14px;
-    -fx-font-family: "Arial";
-    -fx-text-fill: black;
-    -fx-focus-color: transparent;
-    -fx-faint-focus-color: transparent;
-    -fx-border-width: 0px;
-    -fx-padding: 0px;
-    -fx-background-color: transparent;
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
 }
 
-.no-text-area .content {
-    -fx-background-color: transparent;
+.tab{
+    -fx-background-insets: 0 1 0 1,0,0;
+}
+.tab-pane .tab
+{
+    -fx-background-color: #e6e6e6;
+
 }
 
-.no-text-area .scroll-pane {
-    -fx-background-color: transparent;
-    -fx-background-insets: 0;
+.tab-pane .tab:selected
+{
+    -fx-background-color: #3c3c3c;
 }
 
-.no-text-area .text-area {
-    -fx-background-color: transparent;
-    -fx-border-width: 0px;
-    -fx-padding: 0px;
-    -fx-background-insets: 0;
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #828282;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
 }
+
+.tab:selected .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #96b946;
+}
+
+.button {
+    -fx-background-color: black;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-width: 1px;
+    -fx-border-color: #3c3c3c;
+    -fx-text-fill: #828282;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-pref-width: 100px;
+    -fx-padding: 5px 10px;
+    -fx-effect: dropshadow(three-pass-box, #000000, 5, 0, 0, 0);
+}
+
+.button:hover {
+    -fx-background-color: #d6d6d6;
+    -fx-border-color: #96b946;
+}
+
+.button:pressed {
+    -fx-background-color: #b6b6b6;
+}
+
+.button:focused {
+    -fx-border-color: #96b946;
+    -fx-border-width: 2px;
+}
+

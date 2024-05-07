@@ -6,7 +6,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="554.0" prefWidth="798.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.anovelfantasy.StartScreen" style="-fx-background-color: #828A73;">
+<AnchorPane prefHeight="554.0" prefWidth="798.0" style="-fx-background-color: #828A73;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.anovelfantasy.StartScreen">
    <children>
       <VBox layoutX="164.0" layoutY="6.0" prefHeight="554.0" prefWidth="470.0">
          <children>
@@ -26,7 +26,7 @@
                   <Reflection />
                </effect>
                <VBox.margin>
-                  <Insets left="125.0" top="35.0" />
+                  <Insets left="190.0" top="35.0" />
                </VBox.margin>
             </Button>
          </children>
