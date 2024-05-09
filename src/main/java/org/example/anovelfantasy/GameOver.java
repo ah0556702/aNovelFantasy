@@ -49,16 +49,12 @@ public class GameOver {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("loading.fxml"));
             Parent root = loader.load();
 
-            // Get the current stage
             Stage stage = (Stage) playAgainBtn.getScene().getWindow();
 
-            // Create a new scene with the start screen
             Scene scene = new Scene(root);
 
-            // Set the scene to the stage
             stage.setScene(scene);
 
-            // Show the stage
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
