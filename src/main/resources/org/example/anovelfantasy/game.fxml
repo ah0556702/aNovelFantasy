@@ -96,7 +96,7 @@
                               <children>
                                  <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exitGame" prefHeight="26.0" prefWidth="108.0" text="Exit">
                                     <VBox.margin>
-                                       <Insets bottom="50.0" left="65.0" />
+                                       <Insets bottom="50.0" left="68.0" top="25.0" />
                                     </VBox.margin>
                                  </Button>
                                  <Button fx:id="playAgainBtn" onAction="#handlePlayAgain" prefHeight="26.0" prefWidth="113.0" text="Play Again">
@@ -105,6 +105,9 @@
                                     </VBox.margin>
                                  </Button>
                               </children>
+                              <VBox.margin>
+                                 <Insets top="40.0" />
+                              </VBox.margin>
                            </VBox>
                         </children>
                      </VBox>

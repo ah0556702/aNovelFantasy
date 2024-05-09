@@ -36,8 +36,9 @@ public class Loading {
         MediaPlayer mediaPlayer = new MediaPlayer(media);
 
 
-        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // needs to be fixed, not looping
+
         mediaView.setMediaPlayer(mediaPlayer);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // needs to be fixed, not looping
         mediaPlayer.play();
 
         PauseTransition pause = new PauseTransition(Duration.seconds(5)); // allows for the loading screen to be displayed for 3 seconds
